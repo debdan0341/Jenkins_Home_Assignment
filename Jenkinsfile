@@ -1,42 +1,60 @@
 pipeline {
-   agent any
+    agent any
+    
+	 stages {
+		        stage('Checkout') {
+		            steps {
+		                // Checkout Selenium UI testing framework code from the Git repository
+				 git branch: 'pipeline {
+    agent any
+    
+	 stages {
+		        stage('Checkout') {
+		            steps {
+		                // Checkout Selenium UI testing framework code from the Git repository
+				 git branch: 'master', url:'https://github.com/debdan0341/Jenkins_Home_Assignment.git'
 
-   tools {
-      // Install the Maven version configured as "M3" and add it to the path.
-      maven "MAVEN_HOME"
-   }
+		                echo 'checkout'
+		              }
+		           }
+		        
+		        stage('Build') {
+		            steps {
+		                // Build Selenium project using Maven
+				    {
+				        echo 'build'
+				        bat 'mvn clean'
+				    }
+		             }
+		          }
+        
+		        stage('Test') {
+		            steps {
+		                // Run Selenium UI tests using Maven
+				        echo 'test'
+				        bat 'mvn test'
+		            }
+		         }'
 
-   stages {
-      stage('Build') {
-         steps {
-            // Get some code from a GitHub repository 
-            git 'https://github.com/debdan0341/Jenkins_Home_Assignment.git'
-            sh "mvn -Dmaven.test.failure.ignore=true clean compile"
-         }
-         }
-      stage("Test") {
-          steps {
-            git 'https://github.com/debdan0341/Jenkins_Home_Assignment.git'  
-            sh "mvn -Dmaven.test.failure.ignore=true clean test"
-            
-          }
-
-      }
-      stage("Deploy") {
-          steps {
-            git 'https://github.com/debdan0341/Jenkins_Home_Assignment.git'  
-            sh "mvn -Dmaven.test.failure.ignore=true clean install"
-            
-          }
-          post {
-              success {
-                  archiveArtifacts 'target/*.jar'
-              }
-
-          }
-
-
-      }
-
-      }
-   }
+		                echo 'checkout'
+		              }
+		           }
+		        
+		        stage('Build') {
+		            steps {
+		                // Build Selenium project using Maven
+				    {
+				        echo 'build'
+				        bat 'mvn clean'
+				    }
+		             }
+		          }
+        
+		        stage('Test') {
+		            steps {
+		                // Run Selenium UI tests using Maven
+				        echo 'test'
+				        bat 'mvn test'
+		            }
+		         }
+    
