@@ -5,7 +5,7 @@ pipeline {
 		        stage('Checkout') {
 		            steps {
 		                // Checkout Selenium UI testing framework code from the Git repository
-				 git branch: 'pipeline {
+				
     agent any
     
 	 stages {
