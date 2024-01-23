@@ -29,20 +29,7 @@ pipeline {
 		            }
 		         }
         
-		        stage('Publish Reports') {
-		            steps {
-		                // Publish test reports using HTML Publisher plugin
-		               echo 'this is publish reports section'
-			                publishHTML(target: [
-			                    allowMissing: false,
-			                    alwaysLinkToLastBuild: true,
-			                    keepAll: true,
-			                    reportDir: 'target',
-			                    reportFiles: 'index.html',
-			                    reportName: 'Test Report'
-			                ])
-			    }
-		        }
+		        
         
           }
     
