@@ -23,7 +23,7 @@ pipeline {
         
 		        stage('Test') {
 		            steps {
-		                // Run Selenium UI tests using Maven
+		                // Run Selenium tests using Maven
 				        echo 'test'
 				        bat 'mvn test'
 		            }
@@ -31,8 +31,8 @@ pipeline {
         
 		        stage('Publish Reports') {
 		            steps {
-		                // Publish test reports using HTML Publisher plugin
-		               echo 'this is publish reports section'
+		                // Publishing repots using HTML Publisher plugin
+		               echo 'You are in publish reports section'
 			                publishHTML(target:[
 			                    allowMissing: false,
 			                    alwaysLinkToLastBuild: true,
@@ -48,19 +48,19 @@ pipeline {
     
     post {
 	        always {
-			// Clean up temporary files
+			// Cleaning  up tmp
 			
-	            echo 'this is always command in post section'
+	            echo 'this is for post section'
 	        }
         
 	        success {
-	            // Actions to perform when the pipeline succeeds
-	            echo 'Pipeline succeeded!'
+	            // Actions when pipeline succeeds
+	            echo 'Pipeline is Succeeded!'
 	        }
         
 	        failure {
-	            // Actions to perform when the pipeline fails
-	            echo 'Pipeline failed!'
+	            // Actions when pipeline fails
+	            echo 'Pipeline is Failed!'
 	        }
           }
 	
