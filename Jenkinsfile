@@ -1,39 +1,67 @@
 pipeline {
     agent any
+    
+	 stages {
+		        stage('Checkout') {
+		            steps {
+		                // Checkout Selenium UI testing framework code from the Git repository
+				 git branch: 'master', url:'https://github.com/debdan0341/Jenkins_Home_Assignment.git'
 
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'master', url:'https://github.com/debdan0341/Jenkins_Home_Assignment.git'
-                echo 'checkout'
-            }
-        }
-         stage('Build') {
-            steps {
-                dir('.'){
-                echo 'build'
-                bat 'mvn clean'
-            }
-        }
-         }
-        stage('Test') {
-            steps {
-                echo 'test'
-                bat 'mmvn clean'
-            }
-        }
-        post {
-             always{
-                 echo 'post section command'
-             }
-             success{
-                 echo 'Pipeline is Succeeded!!'
-             }
-             failure{
-                 echo 'Pipeline is Failed'
-             }
-        }
+		                echo 'checkout'
+		              }
+		           }
+		        
+		        stage('Build') {
+		            steps {
+		                // Build Selenium project using Maven
+				    dir('.'){
+				        echo 'build'
+				        bat 'mvn clean'
+				    }
+		             }
+		          }
         
+		        stage('Test') {
+		            steps {
+		                // Run Selenium UI tests using Maven
+				        echo 'test'
+				        bat 'mvn test'
+		            }
+		         }
         
-    }
+		        stage('Publish Reports') {
+		            steps {
+		                // Publish test reports using HTML Publisher plugin
+		               echo 'this is publish reports section'
+			                publishHTML(target:[
+			                    allowMissing: false,
+			                    alwaysLinkToLastBuild: true,
+			                    keepAll: true,
+			                    reportDir: 'test-output',
+			                    reportFiles: 'index.html',
+			                    reportName: 'HTML Report'
+			                ])
+			    }
+		        }
+        
+          }
+    
+    post {
+	        always {
+			// Clean up temporary files
+			
+	            echo 'this is always command in post section'
+	        }
+        
+	        success {
+	            // Actions to perform when the pipeline succeeds
+	            echo 'Pipeline succeeded!'
+	        }
+        
+	        failure {
+	            // Actions to perform when the pipeline fails
+	            echo 'Pipeline failed!'
+	        }
+          }
+	
 }
